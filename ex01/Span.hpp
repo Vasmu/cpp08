@@ -12,7 +12,6 @@ class Span {
         unsigned int    _N;
         std::vector<int> _tab;
         unsigned int    _added;
-        int *           _sortedtab;
 
     public :
         Span(void);
@@ -27,6 +26,7 @@ class Span {
         unsigned int     shortestSpan();
         unsigned int     longestSpan();
         void             printTab();
+        
         class NoSpaceAvailable : public std::exception
         {
             public :

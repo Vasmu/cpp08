@@ -65,20 +65,18 @@ unsigned int     Span::shortestSpan() {
         throw NotEnoughValuesForSpan();
     else
     {
-        this->_sortedtab = new int[this->_added];
-        for ( unsigned int i = 0; i < this->_added; i++)
-            this->_sortedtab[i] = this->_tab[i];
-        std::sort(this->_sortedtab, this->_sortedtab + this->_added);
-        for (unsigned int i = 0; i < this->_added - 1; i++)
+        std::vector<int> sortedtab = this->_tab;
+        for ( std::vector<int>::iterator it = this->_tab.begin(); it != this->_tab.end() ; it++)
+            sortedtab.push_back(*it);
+        std::sort(sortedtab.begin(), sortedtab.begin() + this->_added);
+        for ( std::vector<int>::iterator it = sortedtab.begin(); it != (sortedtab.end() - 1) ; it++)
         {
-            if (static_cast<unsigned int>(this->_sortedtab[i + 1] - this->_sortedtab[i]) < shortest)
-                shortest = this->_sortedtab[i + 1] - this->_sortedtab[i];
+            if (static_cast<unsigned int>(*(it + 1) - *it) < shortest)
+                shortest = (*(it + 1) - *it);
             if (shortest == 0)
                 break;
         }
-        // for (unsigned int i = 0; i < this->_added; ++i)
-        //     std::cout << this->_sortedtab[i] << " ";
-        delete [] this->_sortedtab;
+
         return(shortest);
     }
 
